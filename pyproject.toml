@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "supply-chain-procurement-tools"
+version = "0.1.0"
+description = "Protocol-adaptable, read-only procurement planning tools for AI agents."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "Supply Chain Procurement Tools contributors" }]
+dependencies = []
+
+[project.scripts]
+procurement-mcp = "procurement_agent.protocols.mcp.server:main"
+procurement-a2a = "procurement_agent.protocols.a2a.server:main"
+
+[project.optional-dependencies]
+mcp = ["mcp>=1.12,<2"]
+a2a = ["a2a-sdk[http-server]>=1.1,<2", "uvicorn>=0.30"]
+all = ["mcp>=1.12,<2", "a2a-sdk[http-server]>=1.1,<2", "uvicorn>=0.30"]
+dev = ["httpx>=0.27", "pytest>=8"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
